@@ -39,7 +39,7 @@ public class foAblak extends javax.swing.JFrame {
         
         cp.add(jPane3);jPane3.add(textArea);
         
-        cp.add(jPane4);jPane4.add(javax.swing.Box.createHorizontalGlue());jPane4.add(Exit);Exit.addActionListener(new GombFigyelo());
+        cp.add(jPane4);jPane4.add(javax.swing.Box.createHorizontalGlue());jPane4.add(button_back);button_back.addActionListener(new GombFigyelo());
         
         pack();
         
@@ -54,20 +54,21 @@ public class foAblak extends javax.swing.JFrame {
     JButton button8 = new JButton("Tizes");
     JButton button9 = new JButton("Tizenegyes");
     JButton button10 = new JButton("Tizenkettes");
-    JButton Exit = new JButton("Vissza");
+    JButton button_back = new JButton("Vissza");
     
     TextArea textArea = new TextArea("Nyomjon egy gombra a megjelenítéshez!");
     
-    static int vel(int a, int b)
-    {return (int) Math.floor(Math.random()*(b-a+1)+a);}
-    
     class GombFigyelo implements java.awt.event.ActionListener{
-            public void actionPerformed(java.awt.event.ActionEvent e){}
+            public void actionPerformed(java.awt.event.ActionEvent e){
+                if(e.getSource() == button_back) {
+                    dispose();System.out.println("Disposed: foAblak"); new startAblak().setVisible(true);
+                }
+            }
         }
     
     class EgerFigyelo extends java.awt.event.MouseAdapter{
         public void mouseEntered(java.awt.event.MouseEvent e){
-            
+            //nem tudom, hogy ez miért van itt ez még mindig, viszont lehet használni fogom
         }
     }
     
