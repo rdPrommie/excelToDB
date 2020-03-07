@@ -3,46 +3,43 @@ package exceltodb;
 import javax.swing.JPanel;
 import java.awt.Container;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 
 public class keszitetteAblak extends javax.swing.JFrame {
     
-    private JButton button_back                 = new JButton("Vissza");
-    private JPanel panel_cim_sor                = new JPanel();
-    private JPanel panel_nev_sor                = new JPanel();
-    private JPanel panel_tovabbi_adatok_sor     = new JPanel();
-    private JPanel panel_vissza_gomb_sor        = new JPanel();
-    private JLabel label_keszitette             = new JLabel("Készítette");
-    private JLabel label_nev                    = new JLabel("Ruszin Dániel");
-    private JLabel label_tovabbi_adatok         = new JLabel("");
-    private final String tel                    = "Tel.: +36-20/444-2365";
-    private final String email                  = "E-mail: daniel.ruszin98@gmail.com";
-    private final String github                 = "Github: https://github.com/rdPrommie";
-  
-    
+    JButton button_back = new JButton("Vissza");
 
     keszitetteAblak() {
-        felepit();
         setTitle("Készítette");
-        setSize(new java.awt.Dimension(500, 400));
+        setSize(new java.awt.Dimension(500, 500));
         setResizable(rootPaneCheckingEnabled);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(3);
+        felepit();
     }
     
     void felepit() {
         Container cp = getContentPane();
         cp.setLayout(new javax.swing.BoxLayout(cp, 3));
-        cp.add(panel_cim_sor); cp.add(panel_nev_sor); cp.add(panel_tovabbi_adatok_sor); cp.add(panel_vissza_gomb_sor);
-        panel_cim_sor.add(label_keszitette); label_keszitette.setFont(common.font_bold_italic);
-        panel_nev_sor.add(label_nev); label_nev.setFont(common.font_italic);
-        label_tovabbi_adatok.setText("<html>" + tel + "<br>" + email + "<br>" + github);
-        panel_tovabbi_adatok_sor.add(label_tovabbi_adatok); label_tovabbi_adatok.setFont(common.font_common);
-        
+        JPanel jPanel1 = new JPanel();
+        JPanel jPanel2 = new JPanel();
+        cp.add(jPanel1); cp.add(jPanel2);
+        jPanel1.add(new javax.swing.JLabel("Készítette: ")); //kell majd rá font formázás, bold, italic
         
         button_back.setSize(new java.awt.Dimension(100,100));
         button_back.addActionListener(new GombFigyelo());
-        panel_vissza_gomb_sor.add(button_back);
+        jPanel1.add(button_back);
+               
+        /** @todo
+            kell még a név, elérhetőség (e-mail, telefonszám, github)
+        *   és úgy fog kinézni, hogy: 
+        *   (text-align: center)Készítette: <-
+        *   Ruszin Dániel
+        *   Tel.: +36-20-444-2365
+        *   E-mail: daniel.ruszin98@gmail.com
+        *   Github: https://github.com/rdPrommie
+        * -> 
+        * asadasda
+        */
         
         pack();
         
@@ -51,8 +48,7 @@ public class keszitetteAblak extends javax.swing.JFrame {
     class GombFigyelo implements java.awt.event.ActionListener {
         public void actionPerformed(java.awt.event.ActionEvent e) {
             if(e.getSource() == button_back) {
-                dispose(); System.out.println("Disposed: keszitetteAblak."); 
-                new startAblak().setVisible(true);
+                dispose(); System.out.println("Disposed: keszitetteAblak."); new startAblak().setVisible(true);
             }
         }
     }
