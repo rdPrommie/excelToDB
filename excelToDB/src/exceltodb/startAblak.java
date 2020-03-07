@@ -3,6 +3,7 @@ package exceltodb;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -10,43 +11,65 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class startAblak extends javax.swing.JFrame {
+    
+    private BufferedImage image;
+    private JButton button_tablazat_beolvasas   = new JButton("Táblázat beolvasás");
+    private JButton button_keszitette           = new JButton("Készítette");
+    private JButton button_kilepes              = new JButton("Kilépés");
+    private JPanel panel_cim                    = new JPanel();
+    private JPanel panel_kep                    = new JPanel(); 
+    private JPanel panel_gombok                 = new JPanel(); 
+    private JLabel label_cim                    = new JLabel("Adatbázis Excel táblázatból generátor");
 
     public startAblak() {          
-        setTitle("Excel to Database Generator"); //kell majd egy excel ikon -> db ikon kép (Photoshop)
-        setSize(new java.awt.Dimension(500,500));
-        setResizable(false);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(3);
         felepit();
+        setTitle("Excel to Database Generator");
+        setResizable(false);
+        setDefaultCloseOperation(3);
+        setLocationRelativeTo(null);
+        setSize(new java.awt.Dimension(500,400));
     }
     
     void felepit() {
         java.awt.Container cp = getContentPane();
         cp.setLayout(new javax.swing.BoxLayout(cp, 3));
-        JPanel jPanel   = new JPanel();cp.add(jPanel);
-        JLabel jLabel1  = new JLabel("Adatbázis Excel táblázatból generátor");jPanel.add(jLabel1); Font font = new Font("Times New Roman", Font.BOLD + Font.ITALIC,20); jLabel1.setFont(font);
-        JPanel jPane2   = new JPanel(); cp.add(jPane2); 
-        JPanel jPane3   = new JPanel();cp.add(jPane3);
-        jPane3.add(button);button.setSize(new java.awt.Dimension(100,100)); button.addActionListener(new startAblak.GombFigyelo());
-        jPane3.add(button2);button2.setSize(new java.awt.Dimension(100,100)); button2.addActionListener(new startAblak.GombFigyelo());
-        jPane3.add(button3);button3.setSize(new java.awt.Dimension(100,100)); button3.addActionListener(new startAblak.GombFigyelo());
+        cp.add(panel_cim);cp.add(panel_kep);cp.add(panel_gombok);
+        panel_cim.add(label_cim); label_cim.setFont(common.font_bold_italic);
+        
+        try {
+            BufferedImage myPicture = ImageIO.read(new File("C:/Users/danie/Documents/Project/excelToDB/img/xlxstodb.jpg"));
+            //@todo - képméretezés
+            JLabel picLabel = new JLabel(new ImageIcon(myPicture));
+            add(picLabel);
+        } catch(IOException ioe) {
+            System.err.println(ioe);
+            common.showHibaUzenet("Nem található a fájl!");
+        }
+        
+        
+        panel_gombok.add(button_tablazat_beolvasas); button_tablazat_beolvasas.addActionListener(new startAblak.GombFigyelo());
+        panel_gombok.add(button_keszitette); button_keszitette.addActionListener(new startAblak.GombFigyelo());
+        panel_gombok.add(button_kilepes); button_kilepes.addActionListener(new startAblak.GombFigyelo());
         
         pack();
+       
     }
     
-    JButton button  = new JButton("Táblázat beolvasás");
-    JButton button2 = new JButton("Készítette");
-    JButton button3 = new JButton("Kilépés");
+    /*
+    
+    */
+    
+    
     
     
     class GombFigyelo implements java.awt.event.ActionListener{
         public void actionPerformed(java.awt.event.ActionEvent e){
-            if(e.getSource() == button3) System.exit(0);
-            else if(e.getSource() == button2) {
+            if(e.getSource() == button_kilepes) System.exit(0);
+            else if(e.getSource() == button_keszitette) {
                 dispose(); System.out.println("Disposed: startAblak.");
                 System.out.println("setVisible: keszitetteAblak."); new keszitetteAblak().setVisible(true);
             }                
-            else if(e.getSource() == button) {
+            else if(e.getSource() == button_tablazat_beolvasas) {
                 dispose(); System.out.println("Disposed: startAblak.");
                 System.out.println("setVisible: foAblak.");new foAblak().setVisible(true);
             }
