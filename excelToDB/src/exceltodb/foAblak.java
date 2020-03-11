@@ -1,23 +1,34 @@
 package exceltodb;
 
 import java.awt.TextArea;
+import java.io.File;
 import javax.swing.JPanel;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 
 public class foAblak extends javax.swing.JFrame {
     
-     foAblak(){
-        setTitle("SQL-megoldások megjelenítése ");
-        setSize(new java.awt.Dimension(500,500));
+    private File kapott_file = null;
+    
+     foAblak(File kulso_file){
+        setKapottFile(kulso_file);
+        isTablazatFile();
+        felepit();
+        setSize(new java.awt.Dimension(1280,720));
         setResizable(rootPaneCheckingEnabled);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(3);
-        felepit();
-        
     }
      
-      void felepit(){
+    private void setKapottFile(File kulso_file) {
+        kapott_file = kulso_file;
+    }
+    
+    private void isTablazatFile() {
+        //xls, xlsx, csv, ods
+//        String ext2 = FilenameUtils.getExtension("bar.exe");
+    }
+     
+    private void felepit(){
         java.awt.Container cp = getContentPane();
         cp.setLayout(new javax.swing.BoxLayout(cp, 3));
         JPanel jPanel = new JPanel();
