@@ -2,11 +2,7 @@ package exceltodb;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import static java.nio.channels.AsynchronousServerSocketChannel.open;
-import static java.nio.channels.AsynchronousServerSocketChannel.open;
-import java.util.Scanner;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -67,10 +63,16 @@ public class startAblak extends javax.swing.JFrame {
                 System.out.println("setVisible: keszitetteAblak."); new keszitetteAblak().setVisible(true);
             }                
             else if (e.getSource() == button_tablazat_beolvasas) {
-                File valasztott_file = fileKivalasztas();
-                dispose();
-                System.out.println("Disposed: startAblak.");
-                System.out.println("setVisible: foAblak.");new foAblak(valasztott_file).setVisible(true);
+                try {
+                    File valasztott_file = fileKivalasztas();
+                    dispose();
+                    System.out.println("Disposed: startAblak.");
+                    System.out.println("setVisible: foAblak.");new foAblak(valasztott_file).setVisible(true);
+                } catch(Exception exception) {
+                    System.err.println(exception);
+                    new startAblak().setVisible(true);
+                }
+                
             }
         }
     }
